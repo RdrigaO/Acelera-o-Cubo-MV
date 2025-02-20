@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/games")
@@ -13,11 +14,12 @@ import java.util.List;
 public class GameController {
     private final GameService gameService;
 
-    public GameController(GameService gameService){
-        this.gameService = gameService;
-    }
+//    public GameController(GameService gameService) {
+//        this.gameService = gameService;
+//    }
+
     @GetMapping
-    public List<Game> ListAll(){
+    public List<Game> listGames(){
         return gameService.listGames();
     }
     @GetMapping("/disponibles")
@@ -29,7 +31,11 @@ public class GameController {
         return gameService.saveGame(game);
     }
     @DeleteMapping("/{id}")
-    public void deleteGame(@PathVariable Long id){
+    public void deleteGame(@PathVariable UUID id){
         gameService.removeGame(id);
+    }
+    @PutMapping
+    public Game updateGame(@PathVariable UUID id, @RequestBody Game updatedGame){
+        return gameService.updateGame(id, updatedGame);
     }
 }
