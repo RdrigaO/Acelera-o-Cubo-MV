@@ -3,18 +3,22 @@ package com.br.neoGenesis.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.rmi.server.UID;
+import java.util.UUID;
 
 @Entity
 @Table(name = "GAME")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Game {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UID id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
-    public String title;
-    public String platform;
-    public double priceRent;
-    public boolean disponible;
+    private String title;
+    private String platform;
+    private double priceRent;
+    private boolean disponible;
 }
