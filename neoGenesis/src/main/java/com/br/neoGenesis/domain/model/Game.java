@@ -19,6 +19,6 @@ public class Game {
 
     private String title;
     private String platform;
-    private double priceRent;
+    private Double priceRent;
     private boolean disponible;
 }

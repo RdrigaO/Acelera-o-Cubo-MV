@@ -9,33 +9,29 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/games")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class GameController {
     private final GameService gameService;
 
-//    public GameController(GameService gameService) {
-//        this.gameService = gameService;
-//    }
-
-    @GetMapping
+    @GetMapping("/listgames")
     public List<Game> listGames(){
-        return gameService.listGames();
+        return gameService.ListGames();
     }
     @GetMapping("/disponibles")
     public List<Game> listDisponibles(){
-        return gameService.listDisponibleGames();
+        return gameService.ListDisponibleGames();
     }
-    @PostMapping
-    public Game addGame(@RequestBody Game game){
-        return gameService.saveGame(game);
+    @PostMapping("/addgame")
+    public Game AddGame(@RequestBody Game game){
+        return gameService.SaveGame(game);
     }
-    @DeleteMapping("/{id}")
-    public void deleteGame(@PathVariable UUID id){
-        gameService.removeGame(id);
+    @DeleteMapping("/removegame/{id}")
+    public void DeleteGame(@PathVariable UUID id){
+        gameService.RemoveGame(id);
     }
-    @PutMapping
-    public Game updateGame(@PathVariable UUID id, @RequestBody Game updatedGame){
-        return gameService.updateGame(id, updatedGame);
+    @PutMapping("/updategame/{id}")
+    public Game UpdateGame(@PathVariable UUID id, @RequestBody Game updatedGame){
+        return gameService.UpdateGame(id, updatedGame);
     }
 }
