@@ -16,16 +16,16 @@ public class GameService {
     public GameService(GameRepository gameRepo){
         this.gameRepo = gameRepo;
     }
-    public List<Game> ListGames(){
+    public List<Game> listGames(){
         return gameRepo.findAll();
     }
-    public List<Game> ListDisponibleGames(){
+    public List<Game> listDisponibleGames(){
         return gameRepo.findByDisponibleTrue();
     }
-    public Game FindByID(UUID id){
+    public Game findByID(UUID id){
         return gameRepo.findById(id).orElseThrow(() -> new GameNotFoundException("Jogo não encontrado com o Id: " + id));
     }
-    public Game SaveGame(Game game) {
+    public Game saveGame(Game game) {
         if (game == null) throw new InvalidGameException("O jogo não pode ser nulo.");
         if (game.getTitle() == null || game.getTitle().isEmpty())
             throw new InvalidGameException("O titulo do jogo não pode ser vazio.");
@@ -33,13 +33,13 @@ public class GameService {
             throw new InvalidGameException("O tipo de plataforma do jogo não pode ser vazio.");
         return gameRepo.save(game);
     }
-    public void RemoveGame(UUID id){
+    public void removeGame(UUID id){
         if(!gameRepo.existsById(id)){
             throw new GameNotFoundException("Remoção não realizada, verifique o ID: " + id);
         }
         gameRepo.deleteById(id);
     }
-    public Game UpdateGame(UUID id, Game updatedGame) {
+    public Game updateGame(UUID id, Game updatedGame) {
         if(updatedGame != null && (updatedGame.getTitle().isEmpty() || updatedGame.getTitle() == null
                                    || updatedGame.getPlatform().isEmpty() || updatedGame.getPlatform() == null))
         throw new InvalidGameException("Favor preecher os campos obrigatorios antes de atualizar!");
